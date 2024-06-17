@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,13 +18,13 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+    ManageSpace manageSpace = new ManageSpace();
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        JButton [] btns = {jButton1,jButton2,jButton3,jButton4,jButton5};
+        JButton [] btns = {jButton1,btnBackUp,btnSearch,btnCaculateMoney,btnDelete};
         for(var btn:btns){
             btn.setBackground(new Color(21,25,28));
             btn.setUI(new BasicButtonUI());
@@ -66,26 +68,27 @@ public class MainFrame extends javax.swing.JFrame {
         pnlSide = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnBackUp = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnCaculateMoney = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         pnlTop = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        VehicleType = new javax.swing.JComboBox<>();
+        comboboxVehicleType = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        LiNumber = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        txtLicencesTagNumber = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
+        btnAddSpace = new javax.swing.JButton();
         pnlCenter2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlRoot.setLayout(new java.awt.BorderLayout());
 
@@ -119,49 +122,49 @@ public class MainFrame extends javax.swing.JFrame {
         });
         pnlSide.add(jButton1);
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-cloud-50.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBackUp.setBackground(new java.awt.Color(0, 0, 0));
+        btnBackUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-cloud-50.png"))); // NOI18N
+        btnBackUp.setBorderPainted(false);
+        btnBackUp.setPreferredSize(new java.awt.Dimension(60, 60));
+        btnBackUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBackUpActionPerformed(evt);
             }
         });
-        pnlSide.add(jButton2);
+        pnlSide.add(btnBackUp);
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 0));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-50.png"))); // NOI18N
-        jButton3.setBorderPainted(false);
-        jButton3.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setBackground(new java.awt.Color(0, 0, 0));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-50.png"))); // NOI18N
+        btnSearch.setBorderPainted(false);
+        btnSearch.setPreferredSize(new java.awt.Dimension(60, 60));
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
-        pnlSide.add(jButton3);
+        pnlSide.add(btnSearch);
 
-        jButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-us-dollar-circled-50.png"))); // NOI18N
-        jButton4.setBorderPainted(false);
-        jButton4.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCaculateMoney.setBackground(new java.awt.Color(0, 0, 0));
+        btnCaculateMoney.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-us-dollar-circled-50.png"))); // NOI18N
+        btnCaculateMoney.setBorderPainted(false);
+        btnCaculateMoney.setPreferredSize(new java.awt.Dimension(60, 60));
+        btnCaculateMoney.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCaculateMoneyActionPerformed(evt);
             }
         });
-        pnlSide.add(jButton4);
+        pnlSide.add(btnCaculateMoney);
 
-        jButton5.setBackground(new java.awt.Color(0, 0, 0));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-trash-48.png"))); // NOI18N
-        jButton5.setBorderPainted(false);
-        jButton5.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-trash-48.png"))); // NOI18N
+        btnDelete.setBorderPainted(false);
+        btnDelete.setPreferredSize(new java.awt.Dimension(60, 60));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
-        pnlSide.add(jButton5);
+        pnlSide.add(btnDelete);
 
         pnlRoot.add(pnlSide, java.awt.BorderLayout.WEST);
 
@@ -171,49 +174,50 @@ public class MainFrame extends javax.swing.JFrame {
         pnlTop.setBackground(new java.awt.Color(34, 40, 44));
         pnlTop.setPreferredSize(new java.awt.Dimension(0, 130));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Vehicle Type");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Parking Pass:");
 
-        VehicleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bicycle", "MotorBike", "Car" }));
-        VehicleType.addActionListener(new java.awt.event.ActionListener() {
+        comboboxVehicleType.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboboxVehicleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bicycle", "MotorBike", "Car" }));
+        comboboxVehicleType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VehicleTypeActionPerformed(evt);
+                comboboxVehicleTypeActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Licences Tag Number:");
 
-        LiNumber.addActionListener(new java.awt.event.ActionListener() {
+        txtLicencesTagNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LiNumberActionPerformed(evt);
+                txtLicencesTagNumberActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Add");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Refresh");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnRefreshActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Add Space");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnAddSpace.setText("Add Space");
+        btnAddSpace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnAddSpaceActionPerformed(evt);
             }
         });
 
@@ -224,23 +228,22 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(pnlTopLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlTopLayout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(VehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlTopLayout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LiNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(comboboxVehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLicencesTagNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton8)))
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddSpace)))
                 .addContainerGap(219, Short.MAX_VALUE))
         );
         pnlTopLayout.setVerticalGroup(
@@ -251,15 +254,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(VehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboboxVehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(LiNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(txtLicencesTagNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnRefresh)
+                    .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pnlCenter.add(pnlTop, java.awt.BorderLayout.NORTH);
@@ -295,52 +298,65 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpActionPerformed
+        JFileChooser fc = new JFileChooser("D:\\");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".EIU Files", "eiu");
+        fc.setFileFilter(filter);
+        int option = fc.showSaveDialog(null);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            String filename = fc.getSelectedFile().toString();
+            if (!filename.endsWith(".eiu")) {
+                filename += ".eiu";
+            }
+            manageSpace.WriteFileSpace(filename);
+            manageSpace.WriteFileTicket(filename);
+            btnRefreshActionPerformed(evt);
+        }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnBackUpActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnCaculateMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaculateMoneyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnCaculateMoneyActionPerformed
 
-    private void LiNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LiNumberActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LiNumberActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void txtLicencesTagNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLicencesTagNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLicencesTagNumberActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         ManageSpace ms = new ManageSpace();
-        String Type = VehicleType.getSelectedItem().toString();
+        String Type = comboboxVehicleType.getSelectedItem().toString();
         if(Type.equals("Bicycle")){
-            Vehicle v = new Bicycle(LiNumber.getText());
+            Vehicle v = new Bicycle(txtLicencesTagNumber.getText());
             ms.addVehicle(v);
         }else if(Type.equals("MotorBike")){
-            Vehicle v = new MotorBike(LiNumber.getText());
+            Vehicle v = new MotorBike(txtLicencesTagNumber.getText());
             ms.addVehicle(v);
         }else if(Type.equals("Car")){
-            Vehicle v = new Car(LiNumber.getText());
+            Vehicle v = new Car(txtLicencesTagNumber.getText());
             ms.addVehicle(v);
         }
         
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnAddSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpaceActionPerformed
        ManageSpace ms = new ManageSpace();
        ms.CreateSpace(50);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnAddSpaceActionPerformed
 
-    private void VehicleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VehicleTypeActionPerformed
+    private void comboboxVehicleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxVehicleTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_VehicleTypeActionPerformed
+    }//GEN-LAST:event_comboboxVehicleTypeActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         ManageSpace ms = new ManageSpace();
         DefaultTableModel model = (DefaultTableModel) Table1.getModel();
         model.setRowCount(0);
@@ -348,7 +364,7 @@ public class MainFrame extends javax.swing.JFrame {
         for(var s:ms.GetTicketList()){
             model.addRow(new Object[]{s.getSpaceId(),s.getVehicle().getLicensePlate(),s.getVehicle().getClass().getSimpleName(),s.getDate()});
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,17 +402,16 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField LiNumber;
     private javax.swing.JTable Table1;
-    private javax.swing.JComboBox<String> VehicleType;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddSpace;
+    private javax.swing.JButton btnBackUp;
+    private javax.swing.JButton btnCaculateMoney;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox<String> comboboxVehicleType;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -407,5 +422,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlRoot;
     private javax.swing.JPanel pnlSide;
     private javax.swing.JPanel pnlTop;
+    private javax.swing.JTextField txtLicencesTagNumber;
     // End of variables declaration//GEN-END:variables
 }

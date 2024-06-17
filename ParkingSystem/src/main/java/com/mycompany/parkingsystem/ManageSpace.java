@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +24,13 @@ public class ManageSpace implements Serializable {
 
     static ArrayList<Space> spaceList = new ArrayList<>();
     static ArrayList<Ticket> ticketList = new ArrayList<>();
+    //lay list
+    public ArrayList<Space> GetSpaceList(){
+        return spaceList;
+    }
+    public ArrayList<Ticket> GetTicketList(){
+        return ticketList;
+    }
 
     //dat id cho space
     public void CreateSpace(int n) {
@@ -32,11 +41,11 @@ public class ManageSpace implements Serializable {
     }
 
     //cho xe vo+lay ve
-    public boolean addVehicle(Vehicle vehicle, int numDay) {
+    public boolean addVehicle(Vehicle vehicle) {
         for (Space space : spaceList) {
-            if (!space.isIsOccupied() && space.getType().equals(vehicle.getClass().getSimpleName())) {
+            if (!space.isIsOccupied()) {
                 space.ParkVehicle(vehicle);
-                ticketList.add(new Ticket("T" + System.currentTimeMillis(), vehicle, space.getId(), numDay));
+                ticketList.add(new Ticket("T" + System.currentTimeMillis(), vehicle, space.getId(), LocalDate.now()));
                 return true;
             }
         }
@@ -48,7 +57,7 @@ public class ManageSpace implements Serializable {
     static Comparator<Ticket> compareTicketID = (Ticket t1, Ticket t2) -> t1.getTicketId().compareTo(t2.getTicketId());
 
     public boolean RemoveVehicle(String ticketID) {
-        int indexTicket = Collections.binarySearch(ticketList, new Ticket(ticketID, null, "", 0), compareTicketID);
+        int indexTicket = Collections.binarySearch(ticketList, new Ticket(ticketID, null, "", null), compareTicketID);
         if (indexTicket >= 0) {
             Ticket t = ticketList.get(indexTicket);
             int index = Collections.binarySearch(spaceList, new Space(t.getSpaceId(), "", true, null), compareID);
@@ -63,12 +72,13 @@ public class ManageSpace implements Serializable {
     public double FeeCaculate(Ticket t) {
         double fee = 0;
         String type = t.getVehicle().getClass().getSimpleName();
+        Period date = Period.between(t.getDate(), LocalDate.now());
         if (type.equals("Bicycle")) {
-            fee = t.getNumDay() * 5000;
-        } else if (type.equals("MotoBike")) {
-            fee = t.getNumDay() * 10000;
+            fee = date.getDays()*5000;
+        } else if (type.equals("MotorBike")) {
+            fee = date.getDays() * 10000;
         } else {
-            fee = t.getNumDay() * 20000;
+            fee = date.getDays() * 20000;
         }
         return fee;
     }

@@ -4,6 +4,8 @@
  */
 package com.mycompany.parkingsystem;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author ASUS
@@ -12,16 +14,16 @@ public class Ticket {
     private String ticketId;
     private Vehicle vehicle;
     private String spaceId;
-    private int numDay;
+    private LocalDate Date;
 
     public Ticket() {
     }
 
-    public Ticket(String ticketId, Vehicle vehicle, String spaceId, int numDay) {
+    public Ticket(String ticketId, Vehicle vehicle, String spaceId, LocalDate Date) {
         this.ticketId = ticketId;
         this.vehicle = vehicle;
         this.spaceId = spaceId;
-        this.numDay = numDay;
+        this.Date = Date;
     }
 
     public String getTicketId() {
@@ -48,13 +50,16 @@ public class Ticket {
         this.spaceId = spaceId;
     }
 
-    public int getNumDay() {
-        return numDay;
+    public LocalDate getDate() {
+        return Date;
     }
 
-    public void setNumDay(int numDay) {
-        this.numDay = numDay;
+    public void setDate(LocalDate Date) {
+        this.Date = Date;
     }
+    
+
+    
     
     
 }

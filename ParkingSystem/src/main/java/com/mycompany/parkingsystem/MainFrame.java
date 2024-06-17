@@ -300,13 +300,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpActionPerformed
         JFileChooser fc = new JFileChooser("D:\\");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(".EIU Files", "eiu");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".Management Parking Files", "management");
         fc.setFileFilter(filter);
         int option = fc.showSaveDialog(null);
         if (option == JFileChooser.APPROVE_OPTION) {
             String filename = fc.getSelectedFile().toString();
-            if (!filename.endsWith(".eiu")) {
-                filename += ".eiu";
+            if (!filename.endsWith(".management")) {
+                filename += ".management";
             }
             manageSpace.WriteFileSpace(filename);
             manageSpace.WriteFileTicket(filename);
@@ -316,7 +316,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackUpActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        SearchForm sc = new SearchForm();
+        sc.setTitle("Search");
+        sc.setVisible(true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCaculateMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaculateMoneyActionPerformed
@@ -344,7 +346,7 @@ public class MainFrame extends javax.swing.JFrame {
             Vehicle v = new Car(txtLicencesTagNumber.getText());
             ms.addVehicle(v);
         }
-        
+        btnRefreshActionPerformed(evt);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnAddSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpaceActionPerformed

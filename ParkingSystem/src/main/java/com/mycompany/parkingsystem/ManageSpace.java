@@ -4,6 +4,7 @@
  */
 package com.mycompany.parkingsystem;
 
+import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,11 +26,13 @@ public class ManageSpace implements Serializable {
 
     static ArrayList<Space> spaceList = new ArrayList<>();
     static ArrayList<Ticket> ticketList = new ArrayList<>();
+
     //lay list
-    public ArrayList<Space> GetSpaceList(){
+    public ArrayList<Space> GetSpaceList() {
         return spaceList;
     }
-    public ArrayList<Ticket> GetTicketList(){
+
+    public ArrayList<Ticket> GetTicketList() {
         return ticketList;
     }
 
@@ -74,7 +78,7 @@ public class ManageSpace implements Serializable {
         String type = t.getVehicle().getClass().getSimpleName();
         Period date = Period.between(t.getDate(), LocalDate.now());
         if (type.equals("Bicycle")) {
-            fee = date.getDays()*5000;
+            fee = date.getDays() * 5000;
         } else if (type.equals("MotorBike")) {
             fee = date.getDays() * 10000;
         } else {
@@ -144,4 +148,33 @@ public class ManageSpace implements Serializable {
         }
     }
 
+    public void searchBy(String type, String para) {
+        boolean flag = false;
+        switch (type) {
+            case "Licence" -> {
+                for (Ticket cd : ticketList) {
+                    if (cd.getVehicle().getLicensePlate().equals(para)) {
+                        JOptionPane.showMessageDialog(null, "Found ticket: " + para + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    JOptionPane.showMessageDialog(null, "Not found ticket: ", "Search Failed", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            case "Space ID" -> {
+                for (Ticket cd : ticketList) {
+                    if (cd.getSpaceId().equals(para)) {
+                        flag = true;
+                        JOptionPane.showMessageDialog(null, "Found ticket: " + para + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+                }
+                if (!flag) {
+                    JOptionPane.showMessageDialog(null, "Not found ticket: ", "Search Failed", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
 }

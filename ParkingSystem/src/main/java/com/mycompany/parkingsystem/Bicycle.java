@@ -13,5 +13,8 @@ public class Bicycle extends Vehicle{
     public Bicycle(String licensePlate) {
         super(licensePlate);
     }
+    public Bicycle(){
+        super(null);
+    }
     
 }

@@ -5,10 +5,14 @@
 package com.mycompany.parkingsystem;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
@@ -18,20 +22,22 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class MainFrame extends javax.swing.JFrame {
+
     ManageSpace manageSpace = new ManageSpace();
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        JButton [] btns = {jButton1,btnBackUp,btnSearch,btnCaculateMoney,btnDelete};
-        for(var btn:btns){
-            btn.setBackground(new Color(21,25,28));
+        JButton[] btns = {Restore, btnBackUp, btnSearch, btnCaculateMoney, btnDelete};
+        for (var btn : btns) {
+            btn.setBackground(new Color(21, 25, 28));
             btn.setUI(new BasicButtonUI());
             btn.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    
+
                 }
 
                 @Override
@@ -44,13 +50,13 @@ public class MainFrame extends javax.swing.JFrame {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    btn.setBackground(new Color(54,81,207));
+                    btn.setBackground(new Color(54, 81, 207));
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    btn.setBackground(new Color(21,25,28));
-              }
+                    btn.setBackground(new Color(21, 25, 28));
+                }
             });
         }
     }
@@ -67,7 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlRoot = new javax.swing.JPanel();
         pnlSide = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        Restore = new javax.swing.JButton();
         btnBackUp = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnCaculateMoney = new javax.swing.JButton();
@@ -87,8 +93,7 @@ public class MainFrame extends javax.swing.JFrame {
         Table1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
-        getContentPane().setLayout(new java.awt.BorderLayout());
+        setPreferredSize(new java.awt.Dimension(1000, 600));
 
         pnlRoot.setLayout(new java.awt.BorderLayout());
 
@@ -111,16 +116,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlSide.add(jPanel1);
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-home-50.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Restore.setBackground(new java.awt.Color(0, 0, 0));
+        Restore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-cloud-download-50.png"))); // NOI18N
+        Restore.setBorderPainted(false);
+        Restore.setPreferredSize(new java.awt.Dimension(60, 60));
+        Restore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RestoreActionPerformed(evt);
             }
         });
-        pnlSide.add(jButton1);
+        pnlSide.add(Restore);
 
         btnBackUp.setBackground(new java.awt.Color(0, 0, 0));
         btnBackUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-cloud-50.png"))); // NOI18N
@@ -200,6 +205,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +213,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnRefresh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +221,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnAddSpace.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAddSpace.setText("Add Space");
         btnAddSpace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +236,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(pnlTopLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlTopLayout.createSequentialGroup()
@@ -238,13 +245,14 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtLicencesTagNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAddSpace)))
-                .addContainerGap(219, Short.MAX_VALUE))
+                        .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
         pnlTopLayout.setVerticalGroup(
             pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,8 +269,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(txtLicencesTagNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd)
                     .addComponent(btnRefresh)
-                    .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                    .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pnlCenter.add(pnlTop, java.awt.BorderLayout.NORTH);
@@ -270,17 +278,20 @@ public class MainFrame extends javax.swing.JFrame {
         pnlCenter2.setBackground(new java.awt.Color(34, 40, 44));
         pnlCenter2.setLayout(new java.awt.BorderLayout());
 
+        Table1.setAutoCreateRowSorter(true);
         Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Space ID", "Licences Tag Number", "Type", "Register date"
+                "Space ID", "Licences Tag Number", "Type", "Register date", "Ticket ID"
             }
         ));
+        Table1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Table1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(Table1);
 
         pnlCenter2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -294,9 +305,17 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void RestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreActionPerformed
+        JFileChooser fc = new JFileChooser("D:\\");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".Management Parking Files", "management");
+        fc.setFileFilter(filter);
+        int option = fc.showOpenDialog(null);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            String filename = fc.getSelectedFile().toString();
+            manageSpace.ReadFile(filename);
+            btnRefreshActionPerformed(evt);
+        }
+    }//GEN-LAST:event_RestoreActionPerformed
 
     private void btnBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpActionPerformed
         JFileChooser fc = new JFileChooser("D:\\");
@@ -308,8 +327,7 @@ public class MainFrame extends javax.swing.JFrame {
             if (!filename.endsWith(".management")) {
                 filename += ".management";
             }
-            manageSpace.WriteFileSpace(filename);
-            manageSpace.WriteFileTicket(filename);
+            manageSpace.WriteFile(filename);
             btnRefreshActionPerformed(evt);
         }
 
@@ -322,11 +340,23 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCaculateMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaculateMoneyActionPerformed
-        // TODO add your handling code here:
+        CalculateFeeForm cf = new CalculateFeeForm();
+        cf.setVisible(true);
     }//GEN-LAST:event_btnCaculateMoneyActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to delete", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            ManageSpace ms = new ManageSpace();
+            int selected = Table1.getSelectedRow();
+            if (selected != -1) {
+                String ticketID = Table1.getValueAt(selected, 4).toString();
+                ms.Delete(ticketID);
+                btnRefreshActionPerformed(evt);
+            }
+        }
+
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtLicencesTagNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLicencesTagNumberActionPerformed
@@ -336,22 +366,28 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         ManageSpace ms = new ManageSpace();
         String Type = comboboxVehicleType.getSelectedItem().toString();
-        if(Type.equals("Bicycle")){
-            Vehicle v = new Bicycle(txtLicencesTagNumber.getText());
-            ms.addVehicle(v);
-        }else if(Type.equals("MotorBike")){
-            Vehicle v = new MotorBike(txtLicencesTagNumber.getText());
-            ms.addVehicle(v);
-        }else if(Type.equals("Car")){
-            Vehicle v = new Car(txtLicencesTagNumber.getText());
-            ms.addVehicle(v);
+        String licences = txtLicencesTagNumber.getText();
+        if (licences.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Enter Licences Tag Number ", "Failed", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (Type.equals("Bicycle")) {
+                Vehicle v = new Bicycle(txtLicencesTagNumber.getText());
+                ms.addVehicle(v);
+            } else if (Type.equals("MotorBike")) {
+                Vehicle v = new MotorBike(txtLicencesTagNumber.getText());
+                ms.addVehicle(v);
+            } else if (Type.equals("Car")) {
+                Vehicle v = new Car(txtLicencesTagNumber.getText());
+                ms.addVehicle(v);
+            }
         }
+
         btnRefreshActionPerformed(evt);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnAddSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpaceActionPerformed
-       ManageSpace ms = new ManageSpace();
-       ms.CreateSpace(50);
+        ManageSpace ms = new ManageSpace();
+        ms.AddSpace();
     }//GEN-LAST:event_btnAddSpaceActionPerformed
 
     private void comboboxVehicleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxVehicleTypeActionPerformed
@@ -363,10 +399,16 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) Table1.getModel();
         model.setRowCount(0);
         Table1.setModel(model);
-        for(var s:ms.GetTicketList()){
-            model.addRow(new Object[]{s.getSpaceId(),s.getVehicle().getLicensePlate(),s.getVehicle().getClass().getSimpleName(),s.getDate()});
+        for (var s : ms.GetTicketList()) {
+            model.addRow(new Object[]{s.getSpaceId(), s.getVehicle().getLicensePlate(), s.getVehicle().getClass().getSimpleName(), s.getDate(), s.getTicketId()});
         }
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void Table1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Table1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_DELETE){
+            btnDeleteActionPerformed(null);
+        }
+    }//GEN-LAST:event_Table1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -404,6 +446,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Restore;
     private javax.swing.JTable Table1;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAddSpace;
@@ -413,7 +456,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> comboboxVehicleType;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

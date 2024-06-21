@@ -4,11 +4,13 @@
  */
 package com.mycompany.parkingsystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ASUS
  */
-public abstract class Vehicle {
+public abstract class Vehicle implements Serializable{
     private String licensePlate;
 
     public Vehicle(String licensePlate) {

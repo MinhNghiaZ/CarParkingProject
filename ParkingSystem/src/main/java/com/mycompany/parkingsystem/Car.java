@@ -13,5 +13,9 @@ public class Car extends Vehicle{
     public Car(String licensePlate) {
         super(licensePlate);
     }
+    public Car(){
+        super(null);
+    }
+    
     
 }

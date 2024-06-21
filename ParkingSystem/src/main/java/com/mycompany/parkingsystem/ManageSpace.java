@@ -24,8 +24,11 @@ import javax.swing.JOptionPane;
  */
 public class ManageSpace implements Serializable {
 
-    static ArrayList<Space> spaceList = new ArrayList<>();
-    static ArrayList<Ticket> ticketList = new ArrayList<>();
+    private static ArrayList<Space> spaceList = new ArrayList<>();
+    private static ArrayList<Ticket> ticketList = new ArrayList<>();
+
+    public ManageSpace() {
+    }
 
     //lay list
     public ArrayList<Space> GetSpaceList() {
@@ -44,13 +47,28 @@ public class ManageSpace implements Serializable {
         }
     }
 
+    //them space
+    public void AddSpace() {
+        String id = "s" + spaceList.size();
+        spaceList.add(new Space(id, "", false, null));
+    }
+
     //cho xe vo+lay ve
     public boolean addVehicle(Vehicle vehicle) {
+        int count = 0;
         for (Space space : spaceList) {
+            count++;
             if (!space.isIsOccupied()) {
                 space.ParkVehicle(vehicle);
                 ticketList.add(new Ticket("T" + System.currentTimeMillis(), vehicle, space.getId(), LocalDate.now()));
                 return true;
+            } else if (space.getVehicle().getLicensePlate().equals(vehicle.getLicensePlate())) {
+                JOptionPane.showMessageDialog(null, "Vehicle already exist", "Failed", JOptionPane.ERROR_MESSAGE);
+                return false;
+
+            } else if (count == spaceList.size()) {
+                JOptionPane.showMessageDialog(null, "All spaces are full", "Failed", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         }
         return false;
@@ -65,81 +83,63 @@ public class ManageSpace implements Serializable {
         if (indexTicket >= 0) {
             Ticket t = ticketList.get(indexTicket);
             int index = Collections.binarySearch(spaceList, new Space(t.getSpaceId(), "", true, null), compareID);
+            double fee = FeeCaculate(ticketList.get(index));
+            JOptionPane.showMessageDialog(null, fee + " VND", "Fee", JOptionPane.INFORMATION_MESSAGE);
             spaceList.get(index).unParkVehicle();
+            ticketList.remove(index);
             return true;
         } else {
+            JOptionPane.showMessageDialog(null, "Not Found ", "Failed", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
+    }
+
+    public void Delete(String ticketID) {
+        int indexTicket = Collections.binarySearch(ticketList, new Ticket(ticketID, null, "", null), compareTicketID);
+        Ticket t = ticketList.get(indexTicket);
+        int index = Collections.binarySearch(spaceList, new Space(t.getSpaceId(), "", true, null), compareID);
+        spaceList.get(index).unParkVehicle();
+        ticketList.remove(index);
     }
 
     public double FeeCaculate(Ticket t) {
         double fee = 0;
         String type = t.getVehicle().getClass().getSimpleName();
         Period date = Period.between(t.getDate(), LocalDate.now());
+        double day = date.getDays();
+        if (day == 0) {
+            day++;
+        }
         if (type.equals("Bicycle")) {
-            fee = date.getDays() * 5000;
+            fee = day * 5000;
         } else if (type.equals("MotorBike")) {
-            fee = date.getDays() * 10000;
+            fee = day * 10000;
         } else {
-            fee = date.getDays() * 20000;
+            fee = day * 20000;
         }
         return fee;
     }
 
     //write+read file
-    public void WriteFileSpace(String filename) {
+    public void WriteFile(String filename) {
         try {
             FileOutputStream f = new FileOutputStream(filename);
             ObjectOutputStream oStream = new ObjectOutputStream(f);
-            for (Space s : spaceList) {
-                oStream.writeObject(s);
-            }
+            oStream.writeObject(spaceList);
+            oStream.writeObject(ticketList);
             oStream.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void ReadFileSpace(String filename) {
+    public void ReadFile(String filename) {
         try {
             FileInputStream f = new FileInputStream(filename);
             ObjectInputStream inStream = new ObjectInputStream(f);
-            Space st = null;
-            while ((st = (Space) inStream.readObject()) != null) {
-                spaceList.clear();
-                spaceList.add(st);
-            }
-            inStream.close();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class not found");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void WriteFileTicket(String filename) {
-        try {
-            FileOutputStream f = new FileOutputStream(filename);
-            ObjectOutputStream oStream = new ObjectOutputStream(f);
-            for (Ticket s : ticketList) {
-                oStream.writeObject(s);
-            }
-            oStream.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void ReadFileTicket(String filename) {
-        try {
-            FileInputStream f = new FileInputStream(filename);
-            ObjectInputStream inStream = new ObjectInputStream(f);
-            Ticket st = null;
-            while ((st = (Ticket) inStream.readObject()) != null) {
-                ticketList.clear();
-                ticketList.add(st);
-            }
+            spaceList = (ArrayList<Space>) inStream.readObject();
+            ticketList = (ArrayList<Ticket>) inStream.readObject();
             inStream.close();
         } catch (ClassNotFoundException e) {
             System.out.println("Class not found");
@@ -154,7 +154,7 @@ public class ManageSpace implements Serializable {
             case "Licence" -> {
                 for (Ticket cd : ticketList) {
                     if (cd.getVehicle().getLicensePlate().equals(para)) {
-                        JOptionPane.showMessageDialog(null, "Found ticket: " + para + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Found ticket: " + cd.getTicketId() + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
                         flag = true;
                         break;
                     }
@@ -167,7 +167,7 @@ public class ManageSpace implements Serializable {
                 for (Ticket cd : ticketList) {
                     if (cd.getSpaceId().equals(para)) {
                         flag = true;
-                        JOptionPane.showMessageDialog(null, "Found ticket: " + para + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Found ticket: " + cd.getTicketId() + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
                 }

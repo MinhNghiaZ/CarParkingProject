@@ -13,8 +13,8 @@ import javax.swing.JFrame;
 public class ParkingSystem extends JFrame {
 
     public static void main(String[] args) {
-//        MainJFrame af = new MainJFrame();
-//        af.setVisible(true);
+        ManageSpace ms = new ManageSpace();
+        ms.CreateSpace(20);
         MainFrame mf = new MainFrame();
         mf.setVisible(true);
     }

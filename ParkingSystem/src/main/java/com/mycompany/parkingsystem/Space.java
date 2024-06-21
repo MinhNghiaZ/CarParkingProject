@@ -4,11 +4,13 @@
  */
 package com.mycompany.parkingsystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ASUS
  */
-public class Space {
+public class Space implements Serializable{
     private String id;
     private String Type;
     private boolean isOccupied;

@@ -4,13 +4,14 @@
  */
 package com.mycompany.parkingsystem;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author ASUS
  */
-public class Ticket {
+public class Ticket implements Serializable {
     private String ticketId;
     private Vehicle vehicle;
     private String spaceId;

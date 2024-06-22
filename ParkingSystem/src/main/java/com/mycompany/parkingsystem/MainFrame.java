@@ -30,7 +30,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        JButton[] btns = {Restore, btnBackUp, btnSearch, btnCaculateMoney, btnDelete};
+        JButton[] btns = {Restore, btnBackUp, btnSearch, btnCaculateMoney, btnDelete,Setting};
         for (var btn : btns) {
             btn.setBackground(new Color(21, 25, 28));
             btn.setUI(new BasicButtonUI());
@@ -78,6 +78,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         btnCaculateMoney = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        Setting = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         pnlTop = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -88,7 +89,6 @@ public class MainFrame extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnAddSpace = new javax.swing.JButton();
-        btnEditFee = new javax.swing.JButton();
         pnlCenter2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table1 = new javax.swing.JTable();
@@ -172,6 +172,17 @@ public class MainFrame extends javax.swing.JFrame {
         });
         pnlSide.add(btnDelete);
 
+        Setting.setBackground(new java.awt.Color(0, 0, 0));
+        Setting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-settings-50.png"))); // NOI18N
+        Setting.setBorderPainted(false);
+        Setting.setPreferredSize(new java.awt.Dimension(60, 60));
+        Setting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingActionPerformed(evt);
+            }
+        });
+        pnlSide.add(Setting);
+
         pnlRoot.add(pnlSide, java.awt.BorderLayout.WEST);
 
         pnlCenter.setBackground(new java.awt.Color(34, 40, 44));
@@ -230,14 +241,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btnEditFee.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnEditFee.setText("Edit Fee");
-        btnEditFee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditFeeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlTopLayout = new javax.swing.GroupLayout(pnlTop);
         pnlTop.setLayout(pnlTopLayout);
         pnlTopLayout.setHorizontalGroup(
@@ -247,7 +250,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(863, Short.MAX_VALUE))
+                        .addContainerGap(922, Short.MAX_VALUE))
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlTopLayout.createSequentialGroup()
@@ -263,9 +266,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditFee, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addGap(15, 415, Short.MAX_VALUE))))
         );
         pnlTopLayout.setVerticalGroup(
             pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,8 +283,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(txtLicencesTagNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd)
                     .addComponent(btnRefresh)
-                    .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditFee, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -424,10 +424,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Table1KeyPressed
 
-    private void btnEditFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditFeeActionPerformed
-            EditFee2 ed = new EditFee2();
-            ed.setVisible(true);
-    }//GEN-LAST:event_btnEditFeeActionPerformed
+    private void SettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingActionPerformed
+        EditFee2 edit = new EditFee2();
+        edit.setVisible(true);
+    }//GEN-LAST:event_SettingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,13 +466,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Restore;
+    private javax.swing.JButton Setting;
     private javax.swing.JTable Table1;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAddSpace;
     private javax.swing.JButton btnBackUp;
     private javax.swing.JButton btnCaculateMoney;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEditFee;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> comboboxVehicleType;

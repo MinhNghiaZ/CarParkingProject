@@ -9,7 +9,9 @@ package com.mycompany.parkingsystem;
  * @author Administrator
  */
 public class EditFee2 extends javax.swing.JFrame {
- ManageSpace m1 = new ManageSpace();
+
+    ManageSpace m1 = new ManageSpace();
+
     /**
      * Creates new form EditFee2
      */
@@ -43,8 +45,9 @@ public class EditFee2 extends javax.swing.JFrame {
         txtBicycle = new javax.swing.JTextField();
         btnEdit = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        OKIMFine = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Type Of Vehicle");
@@ -58,8 +61,12 @@ public class EditFee2 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Cars");
 
+        carTextPane.setEditable(false);
+        carTextPane.setText(Double.toString(m1.returnFee().getCarFee()));
         jScrollPane1.setViewportView(carTextPane);
 
+        MotorcycleTextPane.setEditable(false);
+        MotorcycleTextPane.setText(Double.toString(m1.returnFee().getMotorFee()));
         jScrollPane2.setViewportView(MotorcycleTextPane);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -68,6 +75,8 @@ public class EditFee2 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Bicycle");
 
+        BicycleTextPane.setEditable(false);
+        BicycleTextPane.setText(Double.toString(m1.returnFee().getBicycleFee()));
         jScrollPane3.setViewportView(BicycleTextPane);
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -83,6 +92,14 @@ public class EditFee2 extends javax.swing.JFrame {
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
+            }
+        });
+
+        OKIMFine.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        OKIMFine.setText("OK");
+        OKIMFine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OKIMFineActionPerformed(evt);
             }
         });
 
@@ -102,21 +119,24 @@ public class EditFee2 extends javax.swing.JFrame {
                         .addGap(174, 174, 174)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(150, 150, 150)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(150, 150, 150))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(OKIMFine, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCars, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBicycle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMotorcycle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtCars, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBicycle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMotorcycle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155))
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addComponent(jLabel4)
@@ -153,7 +173,8 @@ public class EditFee2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OKIMFine, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
 
@@ -161,8 +182,10 @@ public class EditFee2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        setPrice();
-        SetTextPanePrice();
+        m1.ChangeFee(Double.parseDouble(txtCars.getText()), Double.parseDouble(txtMotorcycle.getText()), Double.parseDouble(txtBicycle.getText()));
+        carTextPane.setText(Double.toString(m1.returnFee().getCarFee()));
+        MotorcycleTextPane.setText(Double.toString(m1.returnFee().getMotorFee()));
+        BicycleTextPane.setText(Double.toString(m1.returnFee().getBicycleFee()));
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -171,16 +194,21 @@ public class EditFee2 extends javax.swing.JFrame {
         txtMotorcycle.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void OKIMFineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKIMFineActionPerformed
+        dispose();
+    }//GEN-LAST:event_OKIMFineActionPerformed
+
     public void SetTextPanePrice() {
-        carTextPane.setText(String.valueOf(m1.getCarFee()));
-        MotorcycleTextPane.setText(String.valueOf(m1.getMotorFee()));
-        BicycleTextPane.setText(String.valueOf(m1.getBicycleFee()));
+        Fee f = m1.returnFee();
+        carTextPane.setText(Double.toString(f.getCarFee()));
+        MotorcycleTextPane.setText(Double.toString(f.getMotorFee()));
+        BicycleTextPane.setText(Double.toString(f.getBicycleFee()));
     }
+
     public void setPrice() {
-        m1.setCarFee(Long.parseLong(carTextPane.getText()));
-        m1.setMotorFee(Long.parseLong(MotorcycleTextPane.getText()));
-        m1.setBicycleFee(Long.parseLong(BicycleTextPane.getText()));
+        m1.ChangeFee(Double.parseDouble(carTextPane.getText()), Double.parseDouble(MotorcycleTextPane.getText()), Double.parseDouble(BicycleTextPane.getText()));
     }
+
     /**
      * @param args the command line arguments
      */
@@ -219,6 +247,7 @@ public class EditFee2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane BicycleTextPane;
     private javax.swing.JTextPane MotorcycleTextPane;
+    private javax.swing.JButton OKIMFine;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnEdit;
     private javax.swing.JTextPane carTextPane;

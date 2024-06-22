@@ -22,41 +22,23 @@ import javax.swing.JOptionPane;
  * @author ASUS
  */
 public class ManageSpace implements Serializable {
-    
-
-    public long getCarFee() {
-        return carFee;
-    }
-
-    public void setCarFee(long carFee) {
-        this.carFee = carFee;
-    }
-
-    public long getMotorFee() {
-        return motorFee;
-    }
-
-    public void setMotorFee(long motorFee) {
-        this.motorFee = motorFee;
-    }
-
-    public long getBicycleFee() {
-        return bicycleFee;
-    }
-
-    public void setBicycleFee(long bicycleFee) {
-        this.bicycleFee = bicycleFee;
-    }
 
     private static ArrayList<Space> spaceList = new ArrayList<>();
     private static ArrayList<Ticket> ticketList = new ArrayList<>();
-    private long carFee = 20000;
-    private long motorFee = 10000 ;
-    private long bicycleFee = 5000;
+
 
     public ManageSpace() {
     }
+    static Fee f = new Fee();
 
+    public void ChangeFee(double car,double motor,double bicycle){
+       f.setBicycleFee(bicycle);
+       f.setCarFee(car);
+       f.setMotorFee(motor);
+    }
+    public Fee returnFee(){
+        return f;
+    }
     //lay list
     public ArrayList<Space> GetSpaceList() {
         return spaceList;
@@ -139,11 +121,11 @@ public class ManageSpace implements Serializable {
             day++;
         }
         if (type.equals("Bicycle")) {
-            fee = day * bicycleFee;
+            fee = day * f.getBicycleFee();
         } else if (type.equals("MotorBike")) {
-            fee = day * motorFee;
+            fee = day * f.getMotorFee();
         } else {
-            fee = day * carFee;
+            fee = day * f.getCarFee();
         }
         return fee;
     }

@@ -95,7 +95,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 600));
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlRoot.setLayout(new java.awt.BorderLayout());
 
@@ -248,7 +247,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(810, Short.MAX_VALUE))
+                        .addContainerGap(863, Short.MAX_VALUE))
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlTopLayout.createSequentialGroup()
@@ -426,7 +425,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Table1KeyPressed
 
     private void btnEditFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditFeeActionPerformed
-            EditFee ed = new EditFee();
+            EditFee2 ed = new EditFee2();
             ed.setVisible(true);
     }//GEN-LAST:event_btnEditFeeActionPerformed
 

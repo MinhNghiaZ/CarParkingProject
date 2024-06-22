@@ -4,7 +4,6 @@
  */
 package com.mycompany.parkingsystem;
 
-import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,9 +22,37 @@ import javax.swing.JOptionPane;
  * @author ASUS
  */
 public class ManageSpace implements Serializable {
+    
+
+    public long getCarFee() {
+        return carFee;
+    }
+
+    public void setCarFee(long carFee) {
+        this.carFee = carFee;
+    }
+
+    public long getMotorFee() {
+        return motorFee;
+    }
+
+    public void setMotorFee(long motorFee) {
+        this.motorFee = motorFee;
+    }
+
+    public long getBicycleFee() {
+        return bicycleFee;
+    }
+
+    public void setBicycleFee(long bicycleFee) {
+        this.bicycleFee = bicycleFee;
+    }
 
     private static ArrayList<Space> spaceList = new ArrayList<>();
     private static ArrayList<Ticket> ticketList = new ArrayList<>();
+    private long carFee = 20000;
+    private long motorFee = 10000 ;
+    private long bicycleFee = 5000;
 
     public ManageSpace() {
     }
@@ -112,11 +139,11 @@ public class ManageSpace implements Serializable {
             day++;
         }
         if (type.equals("Bicycle")) {
-            fee = day * 5000;
+            fee = day * bicycleFee;
         } else if (type.equals("MotorBike")) {
-            fee = day * 10000;
+            fee = day * motorFee;
         } else {
-            fee = day * 20000;
+            fee = day * carFee;
         }
         return fee;
     }

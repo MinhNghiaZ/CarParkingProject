@@ -88,12 +88,14 @@ public class MainFrame extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnAddSpace = new javax.swing.JButton();
+        btnEditFee = new javax.swing.JButton();
         pnlCenter2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 600));
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlRoot.setLayout(new java.awt.BorderLayout());
 
@@ -229,6 +231,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnEditFee.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEditFee.setText("Edit Fee");
+        btnEditFee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditFeeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlTopLayout = new javax.swing.GroupLayout(pnlTop);
         pnlTop.setLayout(pnlTopLayout);
         pnlTopLayout.setHorizontalGroup(
@@ -236,6 +246,9 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(pnlTopLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTopLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(810, Short.MAX_VALUE))
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlTopLayout.createSequentialGroup()
@@ -250,9 +263,10 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(303, Short.MAX_VALUE))
+                        .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditFee, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
         pnlTopLayout.setVerticalGroup(
             pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,7 +283,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(txtLicencesTagNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd)
                     .addComponent(btnRefresh)
-                    .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditFee, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -410,6 +425,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Table1KeyPressed
 
+    private void btnEditFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditFeeActionPerformed
+            EditFee ed = new EditFee();
+            ed.setVisible(true);
+    }//GEN-LAST:event_btnEditFeeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -453,6 +473,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnBackUp;
     private javax.swing.JButton btnCaculateMoney;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEditFee;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> comboboxVehicleType;

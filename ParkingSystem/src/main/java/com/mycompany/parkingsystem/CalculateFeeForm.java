@@ -32,6 +32,7 @@ public class CalculateFeeForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jLabel1.setText("Ticket id:");
         jPanel1.add(jLabel1);
@@ -64,7 +65,6 @@ public class CalculateFeeForm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ManageSpace ms = new ManageSpace();
         ms.RemoveVehicle(jTextField1.getText());
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

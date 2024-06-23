@@ -4,6 +4,8 @@
  */
 package com.mycompany.parkingsystem;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Administrator
@@ -182,10 +184,24 @@ public class EditFee2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        m1.ChangeFee(Double.parseDouble(txtCars.getText()), Double.parseDouble(txtMotorcycle.getText()), Double.parseDouble(txtBicycle.getText()));
-        carTextPane.setText(Double.toString(m1.returnFee().getCarFee()));
-        MotorcycleTextPane.setText(Double.toString(m1.returnFee().getMotorFee()));
-        BicycleTextPane.setText(Double.toString(m1.returnFee().getBicycleFee()));
+        String car = txtCars.getText();
+        String motor = txtMotorcycle.getText();
+        String bicycle = txtBicycle.getText();
+        if (car.equals("")) {
+            car = Double.toString(m1.returnFee().getCarFee());
+        }
+        if (motor.equals("")) {
+            motor = Double.toString(m1.returnFee().getMotorFee());
+        }
+        if (bicycle.equals("")) {
+            bicycle = Double.toString(m1.returnFee().getBicycleFee());
+        }
+        if (isNumber(car)&&isNumber(motor)&&isNumber(bicycle)) {
+            m1.ChangeFee(Double.parseDouble(car), Double.parseDouble(motor), Double.parseDouble(bicycle));
+            carTextPane.setText(Double.toString(m1.returnFee().getCarFee()));
+            MotorcycleTextPane.setText(Double.toString(m1.returnFee().getMotorFee()));
+            BicycleTextPane.setText(Double.toString(m1.returnFee().getBicycleFee()));
+        }else JOptionPane.showMessageDialog(null, "please enter number", "Error", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -197,16 +213,13 @@ public class EditFee2 extends javax.swing.JFrame {
     private void OKIMFineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKIMFineActionPerformed
         dispose();
     }//GEN-LAST:event_OKIMFineActionPerformed
-
-    public void SetTextPanePrice() {
-        Fee f = m1.returnFee();
-        carTextPane.setText(Double.toString(f.getCarFee()));
-        MotorcycleTextPane.setText(Double.toString(f.getMotorFee()));
-        BicycleTextPane.setText(Double.toString(f.getBicycleFee()));
-    }
-
-    public void setPrice() {
-        m1.ChangeFee(Double.parseDouble(carTextPane.getText()), Double.parseDouble(MotorcycleTextPane.getText()), Double.parseDouble(BicycleTextPane.getText()));
+    public boolean isNumber(String input) {
+        try {
+            Double.parseDouble(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**

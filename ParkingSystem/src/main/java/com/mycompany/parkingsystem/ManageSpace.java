@@ -87,19 +87,19 @@ public class ManageSpace implements Serializable {
     static Comparator<Space> compareID = (Space s1, Space s2) -> s1.getId().compareTo(s2.getId());
     static Comparator<Ticket> compareTicketID = (Ticket t1, Ticket t2) -> t1.getTicketId().compareTo(t2.getTicketId());
 
-    public boolean RemoveVehicle(String ticketID) {
-        int indexTicket = Collections.binarySearch(ticketList, new Ticket(ticketID, null, "", null), compareTicketID);
+    public void RemoveVehicle(String ticketID) {
+         int indexTicket = Collections.binarySearch(ticketList, new Ticket(ticketID, null, "", null), compareTicketID);
         if (indexTicket >= 0) {
             Ticket t = ticketList.get(indexTicket);
             int index = Collections.binarySearch(spaceList, new Space(t.getSpaceId(), "", true, null), compareID);
-            double fee = FeeCaculate(ticketList.get(index));
+            double fee = FeeCaculate(t);
             JOptionPane.showMessageDialog(null, fee + " VND", "Fee", JOptionPane.INFORMATION_MESSAGE);
-            spaceList.get(index).unParkVehicle();
+            if (index >= 0 && index < spaceList.size()) {
+                spaceList.get(index).unParkVehicle();
+            }
             ticketList.remove(indexTicket);
-            return true;
         } else {
-            JOptionPane.showMessageDialog(null, "Not Found ", "Failed", JOptionPane.ERROR_MESSAGE);
-            return false;
+            JOptionPane.showMessageDialog(null, "Not Found", "Failed", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -108,8 +108,10 @@ public class ManageSpace implements Serializable {
         int indexTicket = Collections.binarySearch(ticketList, new Ticket(ticketID, null, "", null), compareTicketID);
         Ticket t = ticketList.get(indexTicket);
         int index = Collections.binarySearch(spaceList, new Space(t.getSpaceId(), "", true, null), compareID);
-        spaceList.get(index).unParkVehicle();
-        ticketList.remove(index);
+        if (index >= 0 && index < spaceList.size()) {
+                spaceList.get(index).unParkVehicle();
+            }
+        ticketList.remove(indexTicket);
     }
 
     public double FeeCaculate(Ticket t) {

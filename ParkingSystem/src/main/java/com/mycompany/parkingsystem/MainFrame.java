@@ -367,7 +367,7 @@ public class MainFrame extends javax.swing.JFrame {
                 btnRefreshActionPerformed(evt);
 
             }
-        }
+        }else JOptionPane.showMessageDialog(null, "Please choose vehicle to delete", "error", JOptionPane.WARNING_MESSAGE);
 
 
     }//GEN-LAST:event_btnDeleteActionPerformed

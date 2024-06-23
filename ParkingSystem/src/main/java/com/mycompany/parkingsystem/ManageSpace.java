@@ -163,7 +163,8 @@ public class ManageSpace implements Serializable {
             case "Licence" -> {
                 for (Ticket cd : ticketList) {
                     if (cd.getVehicle().getLicensePlate().equals(para)) {
-                        JOptionPane.showMessageDialog(null, "Found ticket: " + cd.getTicketId() + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Found ticket: " + cd.getTicketId() + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " 
+                                + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
                         flag = true;
                         break;
                     }
@@ -176,7 +177,8 @@ public class ManageSpace implements Serializable {
                 for (Ticket cd : ticketList) {
                     if (cd.getSpaceId().equals(para)) {
                         flag = true;
-                        JOptionPane.showMessageDialog(null, "Found ticket: " + cd.getTicketId() + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Found ticket: " + cd.getTicketId() + "\nSpace ID: " + cd.getSpaceId() + "\nDate: " 
+                                + cd.getDate() + "\nType Vehicle: " + cd.getVehicle().getClass().getSimpleName(), "Search Successfully", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
                 }

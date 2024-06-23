@@ -30,7 +30,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        JButton[] btns = {Restore, btnBackUp, btnSearch, btnCaculateMoney, btnDelete,Setting};
+        JButton[] btns = {Restore, btnBackUp, btnSearch, btnCaculateMoney, btnDelete, Setting};
         for (var btn : btns) {
             btn.setBackground(new Color(21, 25, 28));
             btn.setUI(new BasicButtonUI());
@@ -248,9 +248,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(pnlTopLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTopLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(922, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlTopLayout.createSequentialGroup()
                         .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlTopLayout.createSequentialGroup()
@@ -265,8 +263,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 415, Short.MAX_VALUE))))
+                        .addComponent(btnAddSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         pnlTopLayout.setVerticalGroup(
             pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,14 +357,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCaculateMoneyActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to delete", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (response == JOptionPane.YES_OPTION) {
-            ManageSpace ms = new ManageSpace();
-            int selected = Table1.getSelectedRow();
-            if (selected != -1) {
+        int selected = Table1.getSelectedRow();
+        if (selected != -1) {
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to delete", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                ManageSpace ms = new ManageSpace();
                 String ticketID = Table1.getValueAt(selected, 4).toString();
                 ms.Delete(ticketID);
                 btnRefreshActionPerformed(evt);
+
             }
         }
 
@@ -419,7 +418,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void Table1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Table1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_DELETE){
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             btnDeleteActionPerformed(null);
         }
     }//GEN-LAST:event_Table1KeyPressed

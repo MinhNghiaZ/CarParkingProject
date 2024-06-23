@@ -95,7 +95,7 @@ public class ManageSpace implements Serializable {
             double fee = FeeCaculate(ticketList.get(index));
             JOptionPane.showMessageDialog(null, fee + " VND", "Fee", JOptionPane.INFORMATION_MESSAGE);
             spaceList.get(index).unParkVehicle();
-            ticketList.remove(index);
+            ticketList.remove(indexTicket);
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "Not Found ", "Failed", JOptionPane.ERROR_MESSAGE);

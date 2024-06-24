@@ -16,6 +16,7 @@ public class ParkingSystem extends JFrame {
         ManageSpace ms = new ManageSpace();
         ms.CreateSpace(20);
         MainFrame mf = new MainFrame();
+        mf.setTitle("Parking Management App");
         mf.setVisible(true);
     }
 }

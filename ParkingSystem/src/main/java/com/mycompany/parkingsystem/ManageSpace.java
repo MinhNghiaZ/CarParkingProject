@@ -50,7 +50,7 @@ public class ManageSpace implements Serializable {
 
     //dat id cho space
     public void CreateSpace(int n) {
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             String id = "s" + i;
             spaceList.add(new Space(id, "", false, null));
         }

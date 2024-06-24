@@ -353,6 +353,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnCaculateMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaculateMoneyActionPerformed
         CalculateFeeForm cf = new CalculateFeeForm();
+        cf.setTitle("Caculate Money");
         cf.setVisible(true);
     }//GEN-LAST:event_btnCaculateMoneyActionPerformed
 
@@ -425,6 +426,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void SettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingActionPerformed
         EditFee2 edit = new EditFee2();
+        edit.setTitle("Setting Money Caculation");
         edit.setVisible(true);
     }//GEN-LAST:event_SettingActionPerformed
 

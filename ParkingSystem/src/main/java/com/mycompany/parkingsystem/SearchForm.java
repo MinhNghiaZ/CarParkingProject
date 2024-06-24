@@ -64,11 +64,10 @@ public class SearchForm extends javax.swing.JFrame {
     String searchCategory = comboboxSearchBy.getSelectedItem().toString();
         String para = txtSearch.getText();
         if (!para.equals("")) {
-            txtSearch.setText("");
             manageSpace.searchBy(searchCategory, para);
         } else {
             JOptionPane.showMessageDialog(null, "Please Input", "Search Failed", JOptionPane.ERROR_MESSAGE);
-        } // TODO add your handling code here:
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
